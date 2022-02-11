@@ -1,6 +1,6 @@
 {
-    "name": "bukwild/craft-entries-scheduler",
-    "description": "Craft Entries Scheduler. Creates a cronjob to post to a webhook based on a scheduled Craft entry.",
+    "name": "bkwld/craft-webhook-scheduler",
+    "description": "Craft Webhook Scheduler. Creates a cronjob to post to a webhook based on a scheduled Craft entry.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -8,11 +8,12 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "craft-entries-scheduler"
+        "craft-webhook-scheduler"
     ],
     "support": {
-        "docs": "https://github.com/BKWLD/craft-entries-scheduler/blob/master/README.md",
-        "issues": "https://github.com/BKWLD/craft-entries-scheduler/issues"
+        "email": "info@bukwild.com",
+        "docs": "https://github.com/BKWLD/craft-webhook-scheduler/blob/master/README.md",
+        "issues": "https://github.com/BKWLD/craft-webhook-scheduler/issues"
     },
     "license": "MIT",
     "authors": [
@@ -26,16 +27,16 @@
     },
     "autoload": {
         "psr-4": {
-          "bukwild\\craftentriesscheduler\\": "src/"
+          "bkwld\\craftwebhookscheduler\\": "src/"
         }
     },
     "extra": {
-        "name": "Entries Scheduler",
-        "handle": "craft-entries-scheduler",
+        "name": "Webhook Scheduler",
+        "handle": "craft-webhook-scheduler",
         "developer": "Bukwild",
         "developerUrl": "https://bukwild.com",
-        "documentationUrl": "https://github.com/BKWLD/craft-entries-scheduler/blob/master/README.md",
-        "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-entries-scheduler/master/CHANGELOG.md",
-        "class": "bukwild\\craftentriesscheduler\\Craftentriesscheduler"
+        "documentationUrl": "https://github.com/BKWLD/craft-webhook-scheduler/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-webhook-scheduler/master/CHANGELOG.md",
+        "class": "bkwld\\craftwebhookscheduler\\Craftwebhookscheduler"
     }
 }

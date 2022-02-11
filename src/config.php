@@ -1,20 +1,20 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
 /**
- * craft-entries-scheduler config.php
+ * craft-webhook-scheduler config.php
  *
- * This file exists only as a template for the craft-entries-scheduler settings.
+ * This file exists only as a template for the craft-webhook-scheduler settings.
  * It does nothing on its own.
  *
- * Don't edit this file, instead copy it to 'craft/config' as 'craft-entries-scheduler.php'
+ * Don't edit this file, instead copy it to 'craft/config' as 'craft-webhook-scheduler.php'
  * and make your changes there to override default settings.
  *
  * Once copied to 'craft/config', this file will be multi-environment aware as

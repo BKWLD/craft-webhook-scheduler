@@ -1,12 +1,12 @@
 /**
- * craft-entries-scheduler plugin for Craft CMS
+ * craft-webhook-scheduler plugin for Craft CMS
  *
  * Index Field JS
  *
  * @author    Bukwild
  * @copyright Copyright (c) 2022 Bukwild
  * @link      https://bukwild.com
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 
@@ -25,15 +25,15 @@
 				var confirmMsg = $('.delete-webhook-btn').data( "confirm" )
 
 				if (confirm(confirmMsg)){
-					Craft.postActionRequest('craft-entries-scheduler/default/delete', {id}, $.proxy(function(response, textStatus) {
+					Craft.postActionRequest('craft-webhook-scheduler/default/delete', {id}, $.proxy(function(response, textStatus) {
 						if (textStatus === 'success') {
 							if (response.success) {
-								Craft.cp.displayNotice(Craft.t('craft-entries-scheduler', 'Webhook deleted.'));
-								location.href = Craft.getUrl('craft-entries-scheduler/');
+								Craft.cp.displayNotice(Craft.t('craft-webhook-scheduler', 'Webhook deleted.'));
+								location.href = Craft.getUrl('craft-webhook-scheduler/');
 							}
 							else if (response.errors) {
 								var errors = this.flattenErrors(response.errors);
-								alert(Craft.t('craft-entries-scheduler', 'Could not delete the webhook:') + "\n\n" + errors.join("\n"));
+								alert(Craft.t('craft-webhook-scheduler', 'Could not delete the webhook:') + "\n\n" + errors.join("\n"));
 							}
 							else {
 								Craft.cp.displayError();

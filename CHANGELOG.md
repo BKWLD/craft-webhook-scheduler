@@ -1,4 +1,4 @@
-# craft-entries-scheduler Changelog
+# craft-webhook-scheduler Changelog
 
 All notable changes to this project will be documented in this file.
 

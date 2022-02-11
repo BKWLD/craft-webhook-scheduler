@@ -1,5 +1,5 @@
 {% extends '_layouts/cp' %}
-{% set title = 'Entries Scheduler'|t('craft-entries-scheduler') %}
+{% set title = 'Entries Scheduler'|t('craft-webhook-scheduler') %}
 {% import '_includes/forms' as forms %}
 
 
@@ -15,11 +15,11 @@
 
 		<form method="post" action="" accept-charset="UTF-8">
 			{{ csrfInput() }}
-			{{ actionInput('craft-entries-scheduler/default/save') }}
+			{{ actionInput('craft-webhook-scheduler/default/save') }}
 
 		{{ forms.selectField({
 			first: true,
-			label: 'Site'|t('craft-entries-scheduler'),
+			label: 'Site'|t('craft-webhook-scheduler'),
 			id: 'site-id',
 			name: 'siteId',
 			options: sites,
@@ -28,14 +28,14 @@
 
 		{{ forms.textField({
 			first: true,
-			label: 'Webhook Url'|t('craft-entries-scheduler'),
+			label: 'Webhook Url'|t('craft-webhook-scheduler'),
 			required: true,
 			placeholder: 'https://',
 			id: 'webhook-url',
 			name: 'webhookUrl',
 		})}}
 
-	<button type="submit" class="btn btn-success"> {{ 'Save'|t('craft-entries-scheduler') }} </button>
+	<button type="submit" class="btn btn-success"> {{ 'Save'|t('craft-webhook-scheduler') }} </button>
 </form>
 
 		{% if webhooks|length %}
@@ -44,10 +44,10 @@
     <table class="data fullwidth table-responsive">
       <thead>
         <tr>
-          <th>{{ 'Site'|t('craft-entries-scheduler') }}</th>
-          <th>{{ 'Webhook URL'|t('craft-entries-scheduler') }}</th>
-          <th>{{ 'Last Run'|t('craft-entries-scheduler') }}</th>
-          <th>{{ 'Actions'|t('craft-entries-scheduler') }}</th>
+          <th>{{ 'Site'|t('craft-webhook-scheduler') }}</th>
+          <th>{{ 'Webhook URL'|t('craft-webhook-scheduler') }}</th>
+          <th>{{ 'Last Run'|t('craft-webhook-scheduler') }}</th>
+          <th>{{ 'Actions'|t('craft-webhook-scheduler') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -62,7 +62,7 @@
 								 data-id="{{ webhook.id }}"
                  data-confirm="{{ 'Are you sure you want to delete the webhook “{name}”?'|t('webhooks', {name: webhook.webhookUrl}) }}"
               >
-              {{ 'Delete Webhook'|t('craft-entries-scheduler') }}
+              {{ 'Delete Webhook'|t('craft-webhook-scheduler') }}
               </a>
 
             </td>

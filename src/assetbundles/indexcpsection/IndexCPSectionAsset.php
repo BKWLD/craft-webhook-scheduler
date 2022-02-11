@@ -1,14 +1,14 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\assetbundles\indexcpsection;
+namespace bkwld\craftwebhookscheduler\assetbundles\indexcpsection;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -29,7 +29,7 @@ use craft\web\assets\cp\CpAsset;
  * http://www.yiiframework.com/doc-2.0/guide-structure-assets.html
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 class IndexCPSectionAsset extends AssetBundle
@@ -43,7 +43,7 @@ class IndexCPSectionAsset extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = "@bukwild/craftentriesscheduler/assetbundles/indexcpsection/dist";
+        $this->sourcePath = "@bukwild/craftwebhookscheduler/assetbundles/indexcpsection/dist";
 
         // define the dependencies
         $this->depends = [

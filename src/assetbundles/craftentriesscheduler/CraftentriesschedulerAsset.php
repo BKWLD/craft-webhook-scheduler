@@ -1,21 +1,21 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\assetbundles\craftentriesscheduler;
+namespace bkwld\craftwebhookscheduler\assetbundles\craftwebhookscheduler;
 
 use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
 /**
- * CraftentriesschedulerAsset AssetBundle
+ * CraftwebhookschedulerAsset AssetBundle
  *
  * AssetBundle represents a collection of asset files, such as CSS, JS, images.
  *
@@ -29,10 +29,10 @@ use craft\web\assets\cp\CpAsset;
  * http://www.yiiframework.com/doc-2.0/guide-structure-assets.html
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
-class CraftentriesschedulerAsset extends AssetBundle
+class CraftwebhookschedulerAsset extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,7 +43,7 @@ class CraftentriesschedulerAsset extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = "@bukwild/craftentriesscheduler/assetbundles/craftentriesscheduler/dist";
+        $this->sourcePath = "@bukwild/craftwebhookscheduler/assetbundles/craftwebhookscheduler/dist";
 
         // define the dependencies
         $this->depends = [
@@ -53,11 +53,11 @@ class CraftentriesschedulerAsset extends AssetBundle
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/Craftentriesscheduler.js',
+            'js/Craftwebhookscheduler.js',
         ];
 
         $this->css = [
-            'css/Craftentriesscheduler.css',
+            'css/Craftwebhookscheduler.css',
         ];
 
         parent::init();

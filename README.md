@@ -1,8 +1,8 @@
-# craft-entries-scheduler plugin for Craft CMS 3.x
+# craft-webhook-scheduler plugin for Craft CMS 3.x
 
-Craft Entries Scheduler
+Craft Webhook Scheduler
 
-![Screenshot](resources/img/plugin-logo.png)
+![Screenshot](resources/img/icon.svg)
 
 ## Requirements
 
@@ -18,18 +18,18 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require bukwild/craft-entries-scheduler
+        composer require bkwld/craft-webhook-scheduler
 
 3. Add to Crontab:
 
 ```
-* * * * * /usr/bin/php /path-to-project/clifbar/craft-cms/craft craft-entries-scheduler/default
+* * * * * /usr/bin/php /path-to-project/clifbar/craft-cms/craft craft-webhook-scheduler/default
 ```
 
-4. In the Control Panel, go to Settings → Plugins and click the “Install” button for craft-entries-scheduler.
+4. In the Control Panel, go to Settings → Plugins and click the “Install” button for craft-webhook-scheduler.
 
-## Configuring craft-entries-scheduler
+## Configuring craft-webhook-scheduler
 
-Add Webhooks to the corresponding Site in /admin/craft-entries-scheduler
+Add Webhooks to the corresponding Site in /admin/craft-webhook-scheduler
 
 Brought to you by [Bukwild](https://bukwild.com)

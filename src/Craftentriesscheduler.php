@@ -1,16 +1,16 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler;
+namespace bkwld\craftwebhookscheduler;
 
-use bukwild\craftentriesscheduler\models\Settings;
+use bkwld\craftwebhookscheduler\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -38,22 +38,22 @@ use yii\base\Event;
  * https://docs.craftcms.com/v3/extend/
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  *
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-class Craftentriesscheduler extends Plugin
+class Craftwebhookscheduler extends Plugin
 {
     // Static Properties
     // =========================================================================
 
     /**
      * Static property that is an instance of this plugin class so that it can be accessed via
-     * Craftentriesscheduler::$plugin
+     * Craftwebhookscheduler::$plugin
      *
-     * @var Craftentriesscheduler
+     * @var Craftwebhookscheduler
      */
     public static $plugin;
 
@@ -86,7 +86,7 @@ class Craftentriesscheduler extends Plugin
 
     /**
      * Set our $plugin static property to this class so that it can be accessed via
-     * Craftentriesscheduler::$plugin
+     * Craftwebhookscheduler::$plugin
      *
      * Called after the plugin class is instantiated; do any one-time initialization
      * here such as hooks and events.
@@ -113,7 +113,7 @@ class Craftentriesscheduler extends Plugin
 
         // Add in our console commands
         if (Craft::$app instanceof ConsoleApplication) {
-            $this->controllerNamespace = 'bukwild\craftentriesscheduler\console\controllers';
+            $this->controllerNamespace = 'bkwld\craftwebhookscheduler\console\controllers';
         }
 
         // Register our CP routes
@@ -121,12 +121,12 @@ class Craftentriesscheduler extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['craft-entries-scheduler'] = 'craft-entries-scheduler/default';
+                $event->rules['craft-webhook-scheduler'] = 'craft-webhook-scheduler/default';
             }
         );
         Craft::info(
             Craft::t(
-                'craft-entries-scheduler',
+                'craft-webhook-scheduler',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),
@@ -150,7 +150,7 @@ class Craftentriesscheduler extends Plugin
                 'sites.name as siteName',
                 'sites.id as siteId',
             ])
-            ->from(['{{%craftentriesscheduler_webhooks}} as webhooks'])
+            ->from(['{{%craftwebhookscheduler_webhooks}} as webhooks'])
             ->leftJoin('sites as sites', 'webhooks.siteId = sites.id')
             ->orderBy(['webhooks.id' => SORT_DESC])
             ->all();
@@ -173,12 +173,12 @@ class Craftentriesscheduler extends Plugin
                 foreach ($pendingEntries as $pendingEntry) {
                     $isPendingEntryAlreadyScheduled = (new Query())
                         ->select(['*'])
-                        ->from(['{{%craftentriesscheduler_scheduled_posts}}'])
+                        ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
                         ->where(['entryId' => $pendingEntry['id']])
                         ->exists();
 
                     if (!$isPendingEntryAlreadyScheduled) {
-                        Db::insert('{{%craftentriesscheduler_scheduled_posts}}', [
+                        Db::insert('{{%craftwebhookscheduler_scheduled_posts}}', [
                             'siteId' => $webhook['siteId'],
                             'entryId' => $pendingEntry['id'],
                             'dateToPublish' => $pendingEntry['postDate']->format('Y-m-d H:i:s'),
@@ -194,7 +194,7 @@ class Craftentriesscheduler extends Plugin
             // Check if there are entries that needs to be published(post to webhook)
             $pendingEntriesToPublish = (new Query())
                 ->select(['*'])
-                ->from(['{{%craftentriesscheduler_scheduled_posts}}'])
+                ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
                 ->where(['isPublished' => false])
                 ->andWhere(['<', 'dateToPublish', $newDate])
                 ->andWhere(['siteId' => $webhook['siteId']])
@@ -203,7 +203,7 @@ class Craftentriesscheduler extends Plugin
             if (count($pendingEntriesToPublish) > 0) {
                 $entriesId = array_column($pendingEntriesToPublish, 'entryId');
 
-                $dbRes = Db::update('{{%craftentriesscheduler_scheduled_posts}}', [
+                $dbRes = Db::update('{{%craftwebhookscheduler_scheduled_posts}}', [
                     'isPublished' => true,
                 ], [
                     'entryId' => $entriesId
@@ -244,7 +244,7 @@ class Craftentriesscheduler extends Plugin
 
     function updateLastRunDate($id, $date)
     {
-        Db::update('{{%craftentriesscheduler_webhooks}}', [
+        Db::update('{{%craftwebhookscheduler_webhooks}}', [
             'lastRun' => $date,
         ], [
             'id' => $id,
@@ -252,7 +252,7 @@ class Craftentriesscheduler extends Plugin
     }
 
     function log($msgLog){
-        Craft::info("Craft-Entries-Scheduler: $msgLog", 'Craft Entries Scheduler');
+        Craft::info("Craft-Entries-Scheduler: $msgLog", 'Craft Webhook Scheduler');
         echo "Craft-Entries-Scheduler: $msgLog" ."\n";
     }
 

@@ -1,21 +1,21 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {#
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * craft-entries-scheduler Settings.twig
+ * craft-webhook-scheduler Settings.twig
  *
  * @author    Bukwild
  * @copyright Copyright (c) 2022 Bukwild
  * @link      https://bukwild.com
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 #}
 
 {% import "_includes/forms" as forms %}
 
-{% do view.registerAssetBundle("bukwild\\craftentriesscheduler\\assetbundles\\craftentriesscheduler\\CraftentriesschedulerAsset") %}
+{% do view.registerAssetBundle("bkwld\\craftwebhookscheduler\\assetbundles\\craftwebhookscheduler\\CraftwebhookschedulerAsset") %}
 
 {{ forms.textField({
     label: 'Some Field',

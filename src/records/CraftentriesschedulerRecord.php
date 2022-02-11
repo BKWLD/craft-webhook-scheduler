@@ -1,22 +1,22 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\records;
+namespace bkwld\craftwebhookscheduler\records;
 
-use bukwild\craftentriesscheduler\Craftentriesscheduler;
+use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\db\ActiveRecord;
 
 /**
- * CraftentriesschedulerRecord Record
+ * CraftwebhookschedulerRecord Record
  *
  * ActiveRecord is the base class for classes representing relational data in terms of objects.
  *
@@ -28,10 +28,10 @@ use craft\db\ActiveRecord;
  * http://www.yiiframework.com/doc-2.0/guide-db-active-record.html
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
-class CraftentriesschedulerRecord extends ActiveRecord
+class CraftwebhookschedulerRecord extends ActiveRecord
 {
     // Public Static Methods
     // =========================================================================
@@ -50,6 +50,6 @@ class CraftentriesschedulerRecord extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%craftentriesscheduler_webhooks}}';
+        return '{{%craftwebhookscheduler_webhooks}}';
     }
 }

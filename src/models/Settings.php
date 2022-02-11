@@ -1,22 +1,22 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\models;
+namespace bkwld\craftwebhookscheduler\models;
 
-use bukwild\craftentriesscheduler\Craftentriesscheduler;
+use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\base\Model;
 
 /**
- * Craftentriesscheduler Settings Model
+ * Craftwebhookscheduler Settings Model
  *
  * This is a model used to define the plugin's settings.
  *
@@ -26,7 +26,7 @@ use craft\base\Model;
  * https://craftcms.com/docs/plugins/models
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 class Settings extends Model

@@ -1,16 +1,16 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\console\controllers;
+namespace bkwld\craftwebhookscheduler\console\controllers;
 
-use bukwild\craftentriesscheduler\Craftentriesscheduler;
+use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
 
 use Craft;
 use yii\console\Controller;
@@ -30,15 +30,15 @@ use yii\helpers\Console;
  *
  * The actionIndex() method is what is executed if no sub-commands are supplied, e.g.:
  *
- * ./craft craft-entries-scheduler/default
+ * ./craft craft-webhook-scheduler/default
  *
  * Actions must be in 'kebab-case' so actionDoSomething() maps to 'do-something',
  * and would be invoked via:
  *
- * ./craft craft-entries-scheduler/default/do-something
+ * ./craft craft-webhook-scheduler/default/do-something
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 class DefaultController extends Controller
@@ -56,7 +56,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        Craftentriesscheduler::getInstance()->runScheduler();
+        Craftwebhookscheduler::getInstance()->runScheduler();
     }
 
 }

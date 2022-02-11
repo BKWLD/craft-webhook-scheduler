@@ -1,16 +1,16 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\migrations;
+namespace bkwld\craftwebhookscheduler\migrations;
 
-use bukwild\craftentriesscheduler\Craftentriesscheduler;
+use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\config\DbConfig;
@@ -18,7 +18,7 @@ use craft\db\Migration;
 use craft\helpers\MigrationHelper;
 
 /**
- * craft-entries-scheduler Install Migration
+ * craft-webhook-scheduler Install Migration
  *
  * If your plugin needs to create any custom database tables when it gets installed,
  * create a migrations/ folder within your plugin folder, and save an Install.php file
@@ -28,7 +28,7 @@ use craft\helpers\MigrationHelper;
  * safeUp() and safeDown() methods.
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 class Install extends Migration
@@ -98,12 +98,12 @@ class Install extends Migration
     {
         $tablesCreated = false;
 
-    // craftentriesscheduler_craftentriesschedulerrecord table
-        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftentriesscheduler_webhooks}}');
+    // craftwebhookscheduler_craftwebhookschedulerrecord table
+        $tableSchema = Craft::$app->db->schema->getTableSchema('{{%craftwebhookscheduler_webhooks}}');
         if ($tableSchema === null) {
             $tablesCreated = true;
             $this->createTable(
-                '{{%craftentriesscheduler_webhooks}}',
+                '{{%craftwebhookscheduler_webhooks}}',
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
@@ -117,7 +117,7 @@ class Install extends Migration
             );
 
             $this->createTable(
-                '{{%craftentriesscheduler_scheduled_posts}}',
+                '{{%craftwebhookscheduler_scheduled_posts}}',
                 [
                     'id' => $this->primaryKey(),
                     'dateCreated' => $this->dateTime()->notNull(),
@@ -153,8 +153,8 @@ class Install extends Migration
     protected function addForeignKeys()
     {
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%craftentriesscheduler_scheduled_posts}}', 'siteId'),
-            '{{%craftentriesscheduler_scheduled_posts}}',
+            $this->db->getForeignKeyName('{{%craftwebhookscheduler_scheduled_posts}}', 'siteId'),
+            '{{%craftwebhookscheduler_scheduled_posts}}',
             'siteId',
             '{{%sites}}',
             'id',
@@ -163,8 +163,8 @@ class Install extends Migration
         );
 
         $this->addForeignKey(
-            $this->db->getForeignKeyName('{{%craftentriesscheduler_webhooks}}', 'siteId'),
-            '{{%craftentriesscheduler_webhooks}}',
+            $this->db->getForeignKeyName('{{%craftwebhookscheduler_webhooks}}', 'siteId'),
+            '{{%craftwebhookscheduler_webhooks}}',
             'siteId',
             '{{%sites}}',
             'id',
@@ -189,9 +189,9 @@ class Install extends Migration
      */
     protected function removeTables()
     {
-        MigrationHelper::dropForeignKeyIfExists('craftentriesscheduler_scheduled_posts','siteId');
-        MigrationHelper::dropForeignKeyIfExists('craftentriesscheduler_webhooks','siteId');
-        $this->dropTableIfExists('{{%craftentriesscheduler_scheduled_posts}}');
-        $this->dropTableIfExists('{{%craftentriesscheduler_webhooks}}');
+        MigrationHelper::dropForeignKeyIfExists('craftwebhookscheduler_scheduled_posts','siteId');
+        MigrationHelper::dropForeignKeyIfExists('craftwebhookscheduler_webhooks','siteId');
+        $this->dropTableIfExists('{{%craftwebhookscheduler_scheduled_posts}}');
+        $this->dropTableIfExists('{{%craftwebhookscheduler_webhooks}}');
     }
 }

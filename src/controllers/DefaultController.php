@@ -1,17 +1,17 @@
 <?php
 /**
- * craft-entries-scheduler plugin for Craft CMS 3.x
+ * craft-webhook-scheduler plugin for Craft CMS 3.x
  *
- * Craft Entries Scheduler
+ * Craft Webhook Scheduler
  *
  * @link      https://bukwild.com
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bukwild\craftentriesscheduler\controllers;
+namespace bkwld\craftwebhookscheduler\controllers;
 
-use bukwild\craftentriesscheduler\assetbundles\indexcpsection\IndexCPSectionAsset;
-use bukwild\craftentriesscheduler\Craftentriesscheduler;
+use bkwld\craftwebhookscheduler\assetbundles\indexcpsection\IndexCPSectionAsset;
+use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\web\Controller;
@@ -42,7 +42,7 @@ use yii\web\Response;
  * https://craftcms.com/docs/plugins/controllers
  *
  * @author    Bukwild
- * @package   Craftentriesscheduler
+ * @package   Craftwebhookscheduler
  * @since     1.0.0
  */
 class DefaultController extends Controller
@@ -63,7 +63,7 @@ class DefaultController extends Controller
 
     /**
      * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/craft-entries-scheduler/default
+     * e.g.: actions/craft-webhook-scheduler/default
      *
      * @return mixed
      */
@@ -79,7 +79,7 @@ class DefaultController extends Controller
                 'webhooks.lastRun as lastRun',
                 'sites.name as siteName',
             ])
-            ->from(['{{%craftentriesscheduler_webhooks}} as webhooks'])
+            ->from(['{{%craftwebhookscheduler_webhooks}} as webhooks'])
             ->leftJoin('sites as sites','webhooks.siteId = sites.id')
             ->orderBy(['webhooks.id' => SORT_DESC])
             ->all();
@@ -92,14 +92,14 @@ class DefaultController extends Controller
             ->all();
 
         $sitesArray = [
-            ['value' => null, 'label' => Craft::t('craft-entries-scheduler', 'Select Site')],
+            ['value' => null, 'label' => Craft::t('craft-webhook-scheduler', 'Select Site')],
         ];
 
         foreach ($sites as $site) {
             $sitesArray[] = ['value' => $site['id'], 'label' => $site['name']];
         }
 
-        return $this->renderTemplate('craft-entries-scheduler/_manage/index', [
+        return $this->renderTemplate('craft-webhook-scheduler/_manage/index', [
             'webhooks' => $results,
             'sites' => $sitesArray,
         ]);
@@ -112,15 +112,15 @@ class DefaultController extends Controller
         $webhookUrl = $this->request->getRequiredBodyParam('webhookUrl');
 
         if (!$siteId || !$webhookUrl){
-            return $this->redirect('craft-entries-scheduler/?error=true');
+            return $this->redirect('craft-webhook-scheduler/?error=true');
         }
 
-        Db::insert('{{%craftentriesscheduler_webhooks}}', [
+        Db::insert('{{%craftwebhookscheduler_webhooks}}', [
             'siteId' => $siteId,
             'webhookUrl' => $webhookUrl,
         ]);
 
-        return $this->redirect('craft-entries-scheduler/');
+        return $this->redirect('craft-webhook-scheduler/');
     }
 
     public function actionDelete(){
@@ -133,7 +133,7 @@ class DefaultController extends Controller
                 'success' => false,
             ]);
         }
-        Db::delete('{{%craftentriesscheduler_webhooks}}', ['id' => $id]);
+        Db::delete('{{%craftwebhookscheduler_webhooks}}', ['id' => $id]);
 
         return $this->asJson([
             'success' => true,
