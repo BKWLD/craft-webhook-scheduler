@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * craft-entries-scheduler plugin for Craft CMS 3.x
+ *
+ * craft-entries-scheduler Settings.twig
+ *
+ * @author    Bukwild
+ * @copyright Copyright (c) 2022 Bukwild
+ * @link      https://bukwild.com
+ * @package   Craftentriesscheduler
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("bukwild\\craftentriesscheduler\\assetbundles\\craftentriesscheduler\\CraftentriesschedulerAsset") %}
+
+{{ forms.textField({
+    label: 'Some Field',
+    instructions: 'Enter some setting here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: settings['someAttribute']})
+}}

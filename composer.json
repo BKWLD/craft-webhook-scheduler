@@ -1,0 +1,41 @@
+{
+    "name": "bukwild/craft-entries-scheduler",
+    "description": "Craft Entries Scheduler. Creates a cronjob to post to a webhook based on a scheduled Craft entry.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "craft-entries-scheduler"
+    ],
+    "support": {
+        "docs": "https://github.com/BKWLD/craft-entries-scheduler/blob/master/README.md",
+        "issues": "https://github.com/BKWLD/craft-entries-scheduler/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bukwild",
+            "homepage": "https://bukwild.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "bukwild\\craftentriesscheduler\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Entries Scheduler",
+        "handle": "craft-entries-scheduler",
+        "developer": "Bukwild",
+        "developerUrl": "https://bukwild.com",
+        "documentationUrl": "https://github.com/BKWLD/craft-entries-scheduler/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-entries-scheduler/master/CHANGELOG.md",
+        "class": "bukwild\\craftentriesscheduler\\Craftentriesscheduler"
+    }
+}
