@@ -136,10 +136,10 @@ class Craftwebhookscheduler extends Plugin
 
     public function runScheduler()
     {
-        $this->checkRecentProductsAndPostToWebhook();
+        $this->checkPendingEntries();
     }
 
-    public function checkRecentProductsAndPostToWebhook()
+    public function checkPendingEntries()
     {
         // Check all webhooks
         $webhooks = (new Query())

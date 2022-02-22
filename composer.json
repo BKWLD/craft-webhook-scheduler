@@ -37,6 +37,6 @@
         "developerUrl": "https://bukwild.com",
         "documentationUrl": "https://github.com/BKWLD/craft-webhook-scheduler/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-webhook-scheduler/master/CHANGELOG.md",
-        "class": "bkwld\\craftwebhookscheduler\\Craftwebhookscheduler"
+        "class": "bkwld\\craftwebhookscheduler\\Plugin"
     }
 }
