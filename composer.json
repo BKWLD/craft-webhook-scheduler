@@ -1,6 +1,6 @@
 {
     "name": "bkwld/craft-webhook-scheduler",
-    "description": "Craft Webhook Scheduler. Creates a cronjob to post to a webhook based on a scheduled Craft entry.",
+    "description": "Checks pending entries to be able to post to a webhook after publishing them.",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
