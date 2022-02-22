@@ -16,11 +16,8 @@ use craft\helpers\Db;
 use craft\elements\Entry;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
-use craft\console\Application as ConsoleApplication;
 use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
-
-use DateTime;
 use GuzzleHttp\Client;
 use yii\base\Event;
 use yii\base\Component;

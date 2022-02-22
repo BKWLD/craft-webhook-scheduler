@@ -2,6 +2,7 @@
 
 namespace Bkwld\WebhookScheduler\services;
 
+use Craft;
 use craft\db\Query;
 use craft\helpers\Db;
 
@@ -31,6 +32,20 @@ class WebhookService
             ->from(['{{%sites}}'])
             ->orderBy(['id' => SORT_DESC])
             ->all();
+    }
+
+    function getSitesForSelectInput()
+    {
+        $sites = $this->getSites();
+
+        $sitesArray = [
+            ['value' => null, 'label' => Craft::t('craft-webhook-scheduler', 'Select Site')],
+        ];
+
+        foreach ($sites as $site) {
+            $sitesArray[] = ['value' => $site['id'], 'label' => $site['name']];
+        }
+        return $sitesArray;
     }
 
     function saveWebhook($siteId, $webhookUrl)

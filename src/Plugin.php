@@ -10,8 +10,6 @@
 
 namespace Bkwld\WebhookScheduler;
 
-use Bkwld\WebhookScheduler\models\Settings;
-
 use Craft;
 use craft\db\Query;
 use craft\helpers\Db;
@@ -21,16 +19,14 @@ use craft\events\PluginEvent;
 use craft\console\Application as ConsoleApplication;
 use craft\web\UrlManager;
 use craft\events\RegisterUrlRulesEvent;
-
-use DateTime;
-use GuzzleHttp\Client;
-
-use Yii;
-use yii\base\Event;
 use craft\events\ModelEvent;
 use craft\services\Elements;
 use craft\events\ElementEvent;
 use craft\helpers\ElementHelper;
+use Yii;
+use yii\base\Event;
+use GuzzleHttp\Client;
+use craft\web\Controller;
 
 class Plugin extends \craft\base\Plugin
 {
@@ -39,9 +35,9 @@ class Plugin extends \craft\base\Plugin
 
     public $schemaVersion = '1.0.1';
 
-    public $hasCpSettings = false;
+    public $hasCpSettings = true;
 
-    public $hasCpSection = true;
+    public $hasCpSection = false;
 
     public function init()
     {
@@ -91,4 +87,9 @@ class Plugin extends \craft\base\Plugin
         Craft::info(Craft::t('craft-webhook-scheduler', '{name} plugin loaded', ['name' => $this->name]), __METHOD__);
     }
 
+    public function getSettingsResponse()
+    {
+        $url = \craft\helpers\UrlHelper::cpUrl('craft-webhook-scheduler/');
+        return \Craft::$app->controller->redirect($url);
+    }
 }

@@ -55,19 +55,11 @@ class DefaultController extends Controller
         $results = Plugin::getInstance()->webhookService->getWebhooks();
 
         // Sites (ex. Prod, UAT, Dev, Canada, etc...)
-        $sites = Plugin::getInstance()->webhookService->getSites();
-
-        $sitesArray = [
-            ['value' => null, 'label' => Craft::t('craft-webhook-scheduler', 'Select Site')],
-        ];
-
-        foreach ($sites as $site) {
-            $sitesArray[] = ['value' => $site['id'], 'label' => $site['name']];
-        }
+        $sites = Plugin::getInstance()->webhookService->getSitesForSelectInput();
 
         return $this->renderTemplate('craft-webhook-scheduler/_manage/index', [
             'webhooks' => $results,
-            'sites' => $sitesArray,
+            'sites' => $sites,
         ]);
     }
 
