@@ -16,6 +16,7 @@ class WebhookService
                 'webhooks.webhookUrl as webhookUrl',
                 'webhooks.lastRun as lastRun',
                 'sites.name as siteName',
+                'sites.id as siteId',
             ])
             ->from(['{{%craftwebhookscheduler_webhooks}} as webhooks'])
             ->leftJoin('sites as sites', 'webhooks.siteId = sites.id')

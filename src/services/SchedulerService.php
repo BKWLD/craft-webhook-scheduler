@@ -11,7 +11,6 @@
 namespace Bkwld\WebhookScheduler\services;
 
 use Craft;
-use craft\base\Plugin;
 use craft\db\Query;
 use craft\helpers\Db;
 use craft\elements\Entry;
@@ -25,90 +24,89 @@ use DateTime;
 use GuzzleHttp\Client;
 use yii\base\Event;
 use yii\base\Component;
+use Bkwld\WebhookScheduler\Plugin;
 
 class SchedulerService extends Component
 {
 
-    function checkPendingEntries()
+    public function checkPendingEntries()
     {
         // Check all webhooks
-        $webhooks = (new Query())
-            ->select([
-                'webhooks.id as id',
-                'webhooks.webhookUrl as webhookUrl',
-                'webhooks.lastRun as lastRun',
-                'sites.name as siteName',
-                'sites.id as siteId',
-            ])
-            ->from(['{{%craftwebhookscheduler_webhooks}} as webhooks'])
-            ->leftJoin('sites as sites', 'webhooks.siteId = sites.id')
-            ->orderBy(['webhooks.id' => SORT_DESC])
-            ->all();
+        $webhooks = Plugin::getInstance()->webhookService->getWebhooks();
 
         // Return if empty
         if (empty($webhooks)) return;
 
-        // Check each webhook/site
+        // Check each webhook/site for pending entries
         foreach ($webhooks as $webhook) {
-            // Getting current date
-            $newDate = date("Y-m-d H:i:s");
-
-            // Getting pending entries of this siteId
-            $pendingEntries = $this->getPendingEntries($webhook['siteId']);
-
-            if (count($pendingEntries) > 0) {
-                $entriesId = [];
-                // Add pending entries to scheduled entries table
-                foreach ($pendingEntries as $pendingEntry) {
-                    $isPendingEntryAlreadyScheduled = (new Query())
-                        ->select(['*'])
-                        ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
-                        ->where(['entryId' => $pendingEntry['id']])
-                        ->exists();
-
-                    if (!$isPendingEntryAlreadyScheduled) {
-                        Db::insert('{{%craftwebhookscheduler_scheduled_posts}}', [
-                            'siteId' => $webhook['siteId'],
-                            'entryId' => $pendingEntry['id'],
-                            'dateToPublish' => $pendingEntry['postDate']->format('Y-m-d H:i:s'),
-                        ]);
-                        $entriesId[] = $pendingEntry['id'];
-                    }
-                }
-                if (count($entriesId) > 0) $this->log("Adding Pending Entries Ids: " . implode(',', $entriesId) . " to DB");
-            } else {
-                $this->log("No pending entries for this site: " . $webhook['siteName']);
-            }
-
-            // Check if there are entries that needs to be published(post to webhook)
-            $pendingEntriesToPublish = (new Query())
-                ->select(['*'])
-                ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
-                ->where(['isPublished' => false])
-                ->andWhere(['<', 'dateToPublish', $newDate])
-                ->andWhere(['siteId' => $webhook['siteId']])
-                ->all();
-
-            if (count($pendingEntriesToPublish) > 0) {
-                $entriesId = array_column($pendingEntriesToPublish, 'entryId');
-
-                $dbRes = Db::update('{{%craftwebhookscheduler_scheduled_posts}}', [
-                    'isPublished' => true,
-                ], [
-                    'entryId' => $entriesId
-                ], [], false);
-
-                $webhookUrl = $webhook['webhookUrl'];
-                $res = $this->postToWebhook($webhookUrl, $webhook['id']);
-                $this->log($res ?? "Entry Ids: " . implode(',', $entriesId) . " to be posted by Webhook: $webhookUrl | Run Date: $newDate");
-
-                // Clear GraphQL Caches
-                $this->invalidateCaches();
-            } else {
-                $this->log("No pending entries to publish for this site: " . $webhook['siteName']);
-            }
-
+            $this->publishPendingEntries($webhook);
         }
+    }
+
+    function savePendingEntries($webhook)
+    {
+        $pendingEntries = $this->getPendingEntries($webhook['siteId']);
+
+        if (empty($pendingEntries)) {
+            $this->log("No pending entries for this site: " . $webhook['siteName']);
+            return;
+        }
+
+        // Add pending entries to scheduled entries table
+        foreach ($pendingEntries as $pendingEntry) {
+            $this->savePendingEntry($pendingEntry, $webhook['siteId']);
+        }
+    }
+
+    function savePendingEntry($pendingEntry, $siteId){
+        $isPendingEntryAlreadyScheduled = (new Query())
+            ->select(['*'])
+            ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
+            ->where(['entryId' => $pendingEntry['id']])
+            ->exists();
+
+        if (!$isPendingEntryAlreadyScheduled) {
+            Db::insert('{{%craftwebhookscheduler_scheduled_posts}}', [
+                'siteId' => $siteId,
+                'entryId' => $pendingEntry['id'],
+                'dateToPublish' => $pendingEntry['postDate']->format('Y-m-d H:i:s'),
+            ]);
+            $this->log("Adding Pending Entry Id: " . $pendingEntry['id'] . " to DB");
+        }
+    }
+
+    function publishPendingEntries($webhook)
+    {
+        $newDate = date("Y-m-d H:i:s");
+
+        // Check if there are entries that needs to be published(post to webhook)
+        $pendingEntriesToPublish = (new Query())
+            ->select(['*'])
+            ->from(['{{%craftwebhookscheduler_scheduled_posts}}'])
+            ->where(['isPublished' => false])
+            ->andWhere(['<', 'dateToPublish', $newDate])
+            ->andWhere(['siteId' => $webhook['siteId']])
+            ->all();
+
+        if (empty($pendingEntriesToPublish)) {
+            $this->log("No pending entries to publish for this site: " . $webhook['siteName']);
+            return;
+        }
+
+        $entriesId = array_column($pendingEntriesToPublish, 'entryId');
+
+        $dbRes = Db::update('{{%craftwebhookscheduler_scheduled_posts}}', [
+            'isPublished' => true,
+        ], [
+            'entryId' => $entriesId
+        ], [], false);
+
+        $webhookUrl = $webhook['webhookUrl'];
+        $res = $this->postToWebhook($webhookUrl, $webhook['id']);
+        $this->log($res ?? "Entry Ids: " . implode(',', $entriesId) . " to be posted by Webhook: $webhookUrl | Run Date: $newDate");
+
+        // Clear GraphQL Caches
+        $this->invalidateCaches();
     }
 
     function getPendingEntries($siteId)
@@ -140,17 +138,18 @@ class SchedulerService extends Component
         }
     }
 
-    function invalidateCaches(){
+    function invalidateCaches()
+    {
         // Clear GraphQL cache for these entries. See https://github.com/craftcms/cms/issues/7556#issuecomment-777898641
         try {
             Craft::$app->gql->invalidateCaches();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $this->log("Error while invalidating caches");
         }
     }
 
-    function log($msgLog){
-        Craft::info("Craft-Entries-Scheduler: $msgLog", 'Craft Webhook Scheduler');
-        echo "Craft-Entries-Scheduler: $msgLog" ."\n";
+    function log($msgLog)
+    {
+        Craft::info($msgLog, 'Craft Webhook Scheduler');
     }
 }

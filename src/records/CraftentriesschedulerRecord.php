@@ -10,7 +10,7 @@
 
 namespace Bkwld\WebhookScheduler\records;
 
-use Bkwld\WebhookScheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Plugin;
 
 use Craft;
 use craft\db\ActiveRecord;

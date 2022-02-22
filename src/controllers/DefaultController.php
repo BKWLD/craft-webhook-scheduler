@@ -11,7 +11,7 @@
 namespace Bkwld\WebhookScheduler\controllers;
 
 use Bkwld\WebhookScheduler\assetbundles\indexcpsection\IndexCPSectionAsset;
-use Bkwld\WebhookScheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Plugin;
 
 use Craft;
 use craft\web\Controller;
@@ -52,10 +52,10 @@ class DefaultController extends Controller
         Craft::$app->getView()->registerAssetBundle(IndexCPSectionAsset::class);
 
         // Webhooks
-        $results = Craftwebhookscheduler::getInstance()->webhookService->getWebhooks();
+        $results = Plugin::getInstance()->webhookService->getWebhooks();
 
         // Sites (ex. Prod, UAT, Dev, Canada, etc...)
-        $sites = Craftwebhookscheduler::getInstance()->webhookService->getSites();
+        $sites = Plugin::getInstance()->webhookService->getSites();
 
         $sitesArray = [
             ['value' => null, 'label' => Craft::t('craft-webhook-scheduler', 'Select Site')],
@@ -79,7 +79,7 @@ class DefaultController extends Controller
 
         if (!$siteId || !$webhookUrl) return $this->redirect('craft-webhook-scheduler/?error=true');
 
-        Craftwebhookscheduler::getInstance()->webhookService->saveWebhook($siteId, $webhookUrl);
+        Plugin::getInstance()->webhookService->saveWebhook($siteId, $webhookUrl);
 
         return $this->redirect('craft-webhook-scheduler/');
     }
@@ -91,7 +91,7 @@ class DefaultController extends Controller
 
         if (!$id) return $this->asJson(['success' => false]);
 
-        Craftwebhookscheduler::getInstance()->webhookService->deleteWebhook($id);
+        Plugin::getInstance()->webhookService->deleteWebhook($id);
 
         return $this->asJson(['success' => true]);
     }

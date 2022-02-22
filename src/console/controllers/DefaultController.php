@@ -10,7 +10,7 @@
 
 namespace Bkwld\WebhookScheduler\console\controllers;
 
-use Bkwld\WebhookScheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Plugin;
 
 use Craft;
 use yii\console\Controller;
@@ -31,7 +31,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        Craftwebhookscheduler::getInstance()->runScheduler();
+        Plugin::getInstance()->schedulerService->checkPendingEntries();
     }
 
 }

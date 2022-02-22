@@ -43,7 +43,7 @@ class IndexCPSectionAsset extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = "@bukwild/craftwebhookscheduler/assetbundles/indexcpsection/dist";
+        $this->sourcePath = "@Bkwld/WebhookScheduler/assetbundles/indexcpsection/dist";
 
         // define the dependencies
         $this->depends = [

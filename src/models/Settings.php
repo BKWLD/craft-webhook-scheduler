@@ -10,7 +10,7 @@
 
 namespace Bkwld\WebhookScheduler\models;
 
-use Bkwld\WebhookScheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Plugin;
 
 use Craft;
 use craft\base\Model;

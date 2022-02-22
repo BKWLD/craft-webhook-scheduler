@@ -2,7 +2,7 @@
     "name": "bkwld/craft-webhook-scheduler",
     "description": "Checks pending entries to be able to post to a webhook after publishing them.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",
