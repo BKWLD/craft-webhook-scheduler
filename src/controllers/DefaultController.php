@@ -52,24 +52,10 @@ class DefaultController extends Controller
         Craft::$app->getView()->registerAssetBundle(IndexCPSectionAsset::class);
 
         // Webhooks
-        $results = (new Query())
-            ->select([
-                'webhooks.id as id',
-                'webhooks.webhookUrl as webhookUrl',
-                'webhooks.lastRun as lastRun',
-                'sites.name as siteName',
-            ])
-            ->from(['{{%craftwebhookscheduler_webhooks}} as webhooks'])
-            ->leftJoin('sites as sites','webhooks.siteId = sites.id')
-            ->orderBy(['webhooks.id' => SORT_DESC])
-            ->all();
+        $results = Craftwebhookscheduler::getInstance()->webhookService->getWebhooks();
 
         // Sites (ex. Prod, UAT, Dev, Canada, etc...)
-        $sites = (new Query())
-            ->select(['*'])
-            ->from(['{{%sites}}'])
-            ->orderBy(['id' => SORT_DESC])
-            ->all();
+        $sites = Craftwebhookscheduler::getInstance()->webhookService->getSites();
 
         $sitesArray = [
             ['value' => null, 'label' => Craft::t('craft-webhook-scheduler', 'Select Site')],
@@ -91,14 +77,9 @@ class DefaultController extends Controller
         $siteId = $this->request->getBodyParam('siteId');
         $webhookUrl = $this->request->getRequiredBodyParam('webhookUrl');
 
-        if (!$siteId || !$webhookUrl){
-            return $this->redirect('craft-webhook-scheduler/?error=true');
-        }
+        if (!$siteId || !$webhookUrl) return $this->redirect('craft-webhook-scheduler/?error=true');
 
-        Db::insert('{{%craftwebhookscheduler_webhooks}}', [
-            'siteId' => $siteId,
-            'webhookUrl' => $webhookUrl,
-        ]);
+        Craftwebhookscheduler::getInstance()->webhookService->saveWebhook($siteId, $webhookUrl);
 
         return $this->redirect('craft-webhook-scheduler/');
     }
@@ -108,16 +89,11 @@ class DefaultController extends Controller
 
         $id = $this->request->getBodyParam('id');
 
-        if (!$id){
-            return $this->asJson([
-                'success' => false,
-            ]);
-        }
-        Db::delete('{{%craftwebhookscheduler_webhooks}}', ['id' => $id]);
+        if (!$id) return $this->asJson(['success' => false]);
 
-        return $this->asJson([
-            'success' => true,
-        ]);
+        Craftwebhookscheduler::getInstance()->webhookService->deleteWebhook($id);
+
+        return $this->asJson(['success' => true]);
     }
 
 }
