@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\records;
+namespace Bkwld\WebhookScheduler\records;
 
-use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\db\ActiveRecord;

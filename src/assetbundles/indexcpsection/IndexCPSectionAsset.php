@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\assetbundles\indexcpsection;
+namespace Bkwld\WebhookScheduler\assetbundles\indexcpsection;
 
 use Craft;
 use craft\web\AssetBundle;

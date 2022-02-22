@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-          "bkwld\\craftwebhookscheduler\\": "src/"
+          "Bkwld\\WebhookScheduler\\": "src/"
         }
     },
     "extra": {
@@ -37,6 +37,6 @@
         "developerUrl": "https://bukwild.com",
         "documentationUrl": "https://github.com/BKWLD/craft-webhook-scheduler/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-webhook-scheduler/master/CHANGELOG.md",
-        "class": "bkwld\\craftwebhookscheduler\\Plugin"
+        "class": "Bkwld\\WebhookScheduler\\Plugin"
     }
 }

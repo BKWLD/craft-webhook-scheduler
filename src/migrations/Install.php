@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\migrations;
+namespace Bkwld\WebhookScheduler\migrations;
 
-use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\config\DbConfig;

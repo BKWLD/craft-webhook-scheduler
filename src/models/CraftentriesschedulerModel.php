@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\models;
+namespace Bkwld\WebhookScheduler\models;
 
-use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\base\Model;

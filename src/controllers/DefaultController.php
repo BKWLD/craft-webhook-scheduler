@@ -8,10 +8,10 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\controllers;
+namespace Bkwld\WebhookScheduler\controllers;
 
-use bkwld\craftwebhookscheduler\assetbundles\indexcpsection\IndexCPSectionAsset;
-use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\assetbundles\indexcpsection\IndexCPSectionAsset;
+use Bkwld\WebhookScheduler\Craftwebhookscheduler;
 
 use Craft;
 use craft\web\Controller;

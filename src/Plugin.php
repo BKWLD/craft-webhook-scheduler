@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler;
+namespace Bkwld\WebhookScheduler;
 
-use bkwld\craftwebhookscheduler\models\Settings;
+use Bkwld\WebhookScheduler\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -113,7 +113,7 @@ class Craftwebhookscheduler extends Plugin
 
         // Add in our console commands
         if (Craft::$app instanceof ConsoleApplication) {
-            $this->controllerNamespace = 'bkwld\craftwebhookscheduler\console\controllers';
+            $this->controllerNamespace = 'Bkwld\WebhookScheduler\console\controllers';
         }
 
         // Register our CP routes

@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2022 Bukwild
  */
 
-namespace bkwld\craftwebhookscheduler\console\controllers;
+namespace Bkwld\WebhookScheduler\console\controllers;
 
-use bkwld\craftwebhookscheduler\Craftwebhookscheduler;
+use Bkwld\WebhookScheduler\Craftwebhookscheduler;
 
 use Craft;
 use yii\console\Controller;
