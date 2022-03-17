@@ -1,12 +1,10 @@
 # craft-webhook-scheduler plugin for Craft CMS 3.x
 
-Craft Webhook Scheduler
-
-![Screenshot](resources/img/icon.svg)
+A Craft plugin that triggers webhooks when scheduled posts become active.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+This plugin requires Craft CMS 3.
 
 ## Installation
 
@@ -23,7 +21,7 @@ To install the plugin, follow these instructions.
 3. Add to Crontab:
 
 ```
-* * * * * /usr/bin/php /path-to-project/clifbar/craft-cms/craft craft-webhook-scheduler/default
+* * * * * /usr/bin/php /path-to-project/craft craft-webhook-scheduler/default
 ```
 
 4. In the Control Panel, go to Settings → Plugins and click the “Install” button for craft-webhook-scheduler.
