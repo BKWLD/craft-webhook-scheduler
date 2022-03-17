@@ -4,7 +4,7 @@ A Craft plugin that triggers webhooks when scheduled posts become active.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.
+This plugin requires Craft CMS 3.x.
 
 ## Installation
 
