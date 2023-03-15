@@ -33,11 +33,11 @@ class Plugin extends \craft\base\Plugin
 
     public static $plugin;
 
-    public $schemaVersion = '1.0.1';
+    public string $schemaVersion = '1.0.1';
 
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
-    public $hasCpSection = false;
+    public bool $hasCpSection = false;
 
     public function init()
     {
@@ -87,7 +87,7 @@ class Plugin extends \craft\base\Plugin
         Craft::info(Craft::t('craft-webhook-scheduler', '{name} plugin loaded', ['name' => $this->name]), __METHOD__);
     }
 
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
         $url = \craft\helpers\UrlHelper::cpUrl('craft-webhook-scheduler/');
         return \Craft::$app->controller->redirect($url);
