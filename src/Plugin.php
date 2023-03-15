@@ -82,9 +82,6 @@ class Plugin extends \craft\base\Plugin
                 }
             }
         );
-
-        // Log plugin loaded
-        Craft::info(Craft::t('craft-webhook-scheduler', '{name} plugin loaded', ['name' => $this->name]), __METHOD__);
     }
 
     public function getSettingsResponse(): mixed
