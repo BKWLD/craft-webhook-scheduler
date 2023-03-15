@@ -2,7 +2,6 @@
     "name": "bkwld/craft-webhook-scheduler",
     "description": "Checks pending entries to be able to post to a webhook after publishing them.",
     "type": "craft-plugin",
-    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",
@@ -23,7 +22,7 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0"
+        "craftcms/cms": "^3.0 || ^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -38,5 +37,10 @@
         "documentationUrl": "https://github.com/BKWLD/craft-webhook-scheduler/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/BKWLD/craft-webhook-scheduler/master/CHANGELOG.md",
         "class": "Bkwld\\WebhookScheduler\\Plugin"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "craftcms/rector": "dev-main"
     }
 }
