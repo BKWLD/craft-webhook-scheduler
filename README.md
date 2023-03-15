@@ -1,4 +1,4 @@
-# craft-webhook-scheduler plugin for Craft CMS 3 and 4
+# craft-webhook-scheduler plugin
 
 A Craft plugin that triggers webhooks when scheduled posts become active.
 
